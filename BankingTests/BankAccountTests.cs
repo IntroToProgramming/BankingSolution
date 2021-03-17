@@ -1,5 +1,6 @@
 ﻿
 using BankingDomain;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace BankingTests
 
         public BankAccountTests()
         {
-            _account = new BankAccount(new DummyBonusCalculator());
+            _account = new BankAccount(
+                new Mock<ICanCalculateBankAccountBonuses>().Object);
             _balance = _account.GetBalance();
         }
         [Fact]
@@ -55,11 +57,5 @@ namespace BankingTests
                 _account.GetBalance());
         }
     }
-    public class DummyBonusCalculator : ICanCalculateBankAccountBonuses
-    {
-        public decimal For(decimal balance, decimal amountToDeposit)
-        {
-            return 0;
-        }
-    }
+
 }

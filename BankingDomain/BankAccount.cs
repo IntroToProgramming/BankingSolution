@@ -21,7 +21,7 @@ namespace BankingDomain
         {
             // write the code I wish I had
             decimal bonus = _bankAccountBonusCalculator.For(_balance,
-                18);
+                amountToDeposit);
 
             _balance += amountToDeposit  + bonus;
         }
