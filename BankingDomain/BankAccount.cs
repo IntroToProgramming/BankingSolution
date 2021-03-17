@@ -6,10 +6,12 @@ namespace BankingDomain
     {
         private decimal _balance = 5000; // Class Variable "Field"
         private ICanCalculateBankAccountBonuses _bankAccountBonusCalculator;
+        private INotifyTheFeds _fedNotifier;
 
-        public BankAccount(ICanCalculateBankAccountBonuses bankAccountBonusCalculator)
+        public BankAccount(ICanCalculateBankAccountBonuses bankAccountBonusCalculator, INotifyTheFeds fedNotifier)
         {
             _bankAccountBonusCalculator = bankAccountBonusCalculator;
+            _fedNotifier = fedNotifier;
         }
 
         public decimal GetBalance()
@@ -28,6 +30,8 @@ namespace BankingDomain
 
         public void Withdraw(decimal amountToWithdraw)
         {
+
+           _fedNotifier.NotifyOfWithdrawal(this, amountToWithdraw);
             _balance -= amountToWithdraw;
         }
     }

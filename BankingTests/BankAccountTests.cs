@@ -18,7 +18,9 @@ namespace BankingTests
         public BankAccountTests()
         {
             _account = new BankAccount(
-                new Mock<ICanCalculateBankAccountBonuses>().Object);
+                new Mock<ICanCalculateBankAccountBonuses>().Object,
+                new Mock<INotifyTheFeds>().Object
+                );
             _balance = _account.GetBalance();
         }
         [Fact]
