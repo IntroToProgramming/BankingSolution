@@ -20,10 +20,10 @@ namespace BankingDomain
         public void Deposit(decimal amountToDeposit)
         {
             // write the code I wish I had
-            //decimal bonus = _bankAccountBonusCalculator.For(_balance,
-            //    amountToDeposit);
+            decimal bonus = _bankAccountBonusCalculator.For(_balance,
+                18);
 
-            _balance += amountToDeposit; // + bonus;
+            _balance += amountToDeposit  + bonus;
         }
 
         public void Withdraw(decimal amountToWithdraw)
