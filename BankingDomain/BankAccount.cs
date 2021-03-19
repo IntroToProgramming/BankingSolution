@@ -21,6 +21,7 @@ namespace BankingDomain
 
         public void Deposit(decimal amountToDeposit)
         {
+            GuardNoNegatives(amountToDeposit);
             // write the code I wish I had
             decimal bonus = _bankAccountBonusCalculator.For(_balance,
                 amountToDeposit);
@@ -30,9 +31,22 @@ namespace BankingDomain
 
         public void Withdraw(decimal amountToWithdraw)
         {
+            GuardNoNegatives(amountToWithdraw);
 
-           _fedNotifier.NotifyOfWithdrawal(this, amountToWithdraw);
+            if (amountToWithdraw > _balance)
+            {
+                throw new OverdraftException();
+            }
+            _fedNotifier.NotifyOfWithdrawal(this, amountToWithdraw);
             _balance -= amountToWithdraw;
+        }
+
+        private  void GuardNoNegatives(decimal amount)
+        {
+            if (amount < 0)
+            {
+                throw new NoNegativeNumberTransactionsException();
+            }
         }
     }
 }
