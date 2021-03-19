@@ -55,9 +55,11 @@ namespace BankingKiosk
                 }
                 catch (OverdraftException)
                 {
-
-                    MessageBox.Show("Get a Job, Loser!", "Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DisplayError("Get a Job, Loser!");
+                }
+                catch (NoNegativeNumberTransactionsException)
+                {
+                    DisplayError("No Negative Numbers!");
                 }
                 finally
                 {
@@ -74,7 +76,11 @@ namespace BankingKiosk
             }
         }
 
-       
+        private void DisplayError(string message)
+        {
+            MessageBox.Show(message, "Error",
+           MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     public class FakeFedNotifier : INotifyTheFeds

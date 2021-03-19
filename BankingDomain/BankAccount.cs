@@ -41,7 +41,7 @@ namespace BankingDomain
             _balance -= amountToWithdraw;
         }
 
-        private  void GuardNoNegatives(decimal amount)
+        private void GuardNoNegatives(decimal amount)
         {
             if (amount < 0)
             {
